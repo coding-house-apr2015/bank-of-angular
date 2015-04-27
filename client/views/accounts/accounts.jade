@@ -29,3 +29,19 @@ h4 Transactions
         button.btn.btn-success(ng-click='addTransaction("deposit", tx)') Deposit
         button.btn.btn-danger(ng-click='addTransaction("withdraw", tx)') Withdraw
   .cols-xs-8
+
+table.table.table-striped(ng-repeat='(key, value) in afUser.accounts')
+  thead
+    tr
+      th Delete
+      th Amount
+      th Name
+      th Date
+      th Created At
+  tbody
+    tr(ng-repeat='transaction in afUser.accounts[key]')
+      td: button.btn.btn-danger.btn-xs(ng-click='delTransaction(transaction, $index)') Delete
+      td {{transaction.amount | currency}}
+      td {{transaction.name}}
+      td {{transaction.date | date:'yyyy-MM-dd'}}
+      td {{transaction.createdAt | date:'yyyy-MM-dd'}}

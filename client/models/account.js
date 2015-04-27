@@ -11,6 +11,7 @@ angular.module('poseidon')
   Account.init = function(){
     fbUser = $rootScope.fbRoot.child('users/' + $rootScope.activeUser.uid);
     afUser = $firebaseObject(fbUser);
+    return afUser;
   };
 
   Account.add = function(name){
@@ -18,7 +19,7 @@ angular.module('poseidon')
     names.push(name);
 
     afUser.names = names.join(',');
-    afUser.$save();
+    return afUser.$save();
   };
 
   return Account;

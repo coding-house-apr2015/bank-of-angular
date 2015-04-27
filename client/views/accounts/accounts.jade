@@ -1,11 +1,24 @@
 h3 ACCOUNTS
 
+h4 Account Creation
 .row
   .col-xs-4
     form(name='accountTypeForm', novalidate)
       .form-group
         label(for='accountName') Account Name
         input.form-control#accountName(type='text', name='accountName', ng-model='accountName')
+      .form-group
+        button.btn.btn-default(type='submit', ng-click='addAccount(accountName)') Add Account
+  .cols-xs-8
+
+h4 Transactions
+.row
+  .col-xs-4
+    form(name='transactionForm', novalidate)
+      .form-group
+        label(for='accountType') Account Type
+        select.form-control#accountType(name='accountType', ng-model='tx.type')
+          option(ng-repeat='name in names') {{name}}
       .form-group
         button.btn.btn-default(type='submit', ng-click='addAccount(accountName)') Add Account
   .cols-xs-8

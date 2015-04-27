@@ -10,6 +10,10 @@ angular.module('poseidon')
     $scope.accountName = '';
   };
 
+  $scope.addTransaction = function(name, tx){
+    Account.addTransaction(name, tx);
+  };
+
   function syncNames(){
     $scope.names = afUser.names ? afUser.names.split(',') : [];
   }

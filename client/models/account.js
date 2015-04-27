@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('poseidon')
-.factory('Account', function($rootScope, $firebaseObject){
+.factory('Account', function($rootScope, $firebaseObject, $firebaseArray){
   var fbUser;
   var afUser;
 
@@ -12,6 +12,12 @@ angular.module('poseidon')
     fbUser = $rootScope.fbRoot.child('users/' + $rootScope.activeUser.uid);
     afUser = $firebaseObject(fbUser);
     return afUser;
+  };
+
+  Account.addTransaction = function(name, tx){
+    var fbTransactions = fbUser.child('accounts/' + tx.type);
+    var afTransactions = $firebaseArray(fbTransactions);
+    afTransactions.$add(tx);
   };
 
   Account.add = function(name){

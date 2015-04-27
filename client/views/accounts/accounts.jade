@@ -20,5 +20,12 @@ h4 Transactions
         select.form-control#accountType(name='accountType', ng-model='tx.type')
           option(ng-repeat='name in names') {{name}}
       .form-group
-        button.btn.btn-default(type='submit', ng-click='addAccount(accountName)') Add Account
+        label(for='amount') Amount
+        input.form-control#amount(name='amount', type='number', ng-model='tx.amount')
+      .form-group
+        label(for='date') Date
+        input.form-control#date(name='date', type='date', ng-model='tx.date')
+      .form-group
+        button.btn.btn-success(ng-click='addTransaction("deposit", tx)') Deposit
+        button.btn.btn-danger(ng-click='addTransaction("withdraw", tx)') Withdraw
   .cols-xs-8

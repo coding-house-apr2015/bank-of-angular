@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('poseidon')
-.factory('Account', function($rootScope, $firebaseObject, $firebaseArray){
+.factory('Account', function($rootScope, $firebaseObject, $firebaseArray, $window){
   var fbUser;
   var afUser;
 
@@ -15,9 +15,13 @@ angular.module('poseidon')
   };
 
   Account.addTransaction = function(name, tx){
+    var transaction = angular.copy(tx);
+    transaction.date = transaction.date.getTime();
+    transaction.createdAt = $window.Firebase.ServerValue.TIMESTAMP;
+    transaction.name = name;
     var fbTransactions = fbUser.child('accounts/' + tx.type);
     var afTransactions = $firebaseArray(fbTransactions);
-    afTransactions.$add(tx);
+    afTransactions.$add(transaction);
   };
 
   Account.add = function(name){
